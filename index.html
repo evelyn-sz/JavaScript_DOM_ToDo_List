@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link rel="stylesheet" href="./public/css/main.css">
+  <script src="./public/js/bundle.js"></script>
+</head>
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="(task, i) in tasks" v-bind:class="task.isCompleted ? 'completed' : 'not-completed'">
+        <span>{{ task.name }}</span>
+        <span>{{ task.priority }}</span>
+        <span v-if="task.isCompleted">Completed</span>
+        <button v-if="!task.isCompleted" v-on:click="markCompleted(i)">Mark Completed</button>
+      </li>
+    </ul>
+    <form v-on:submit.prevent = "saveNewTask">
+      <div class="form-item">
+        <label for="new-task">Add new task:</label>
+        <input type="text" id="new-task" v-model="newTask"/>
+      </div>
+
+      <div class="form-item">
+        <label for="priority" class="primary">Priority</label>
+
+          <div class ="radio-element">
+            <input type="radio" id="priorityLevelLow" v-model= "priorityLevel" name="priorityLevel" value="Low">
+            <label for="priorityLevelLow">Low</label>
+          </div>
+
+          <div class ="radio-element">
+            <input type="radio" id="priorityLevelStandard" v-model= "priorityLevel" name="priorityLevel" value="Standard">
+            <label for="priorityLevelStandard">Standard</label>
+          </div>
+
+          <div class ="radio-element">
+            <input type="radio" id="priorityLevelHigh" v-model= "priorityLevel" name="priorityLevel" value="High">
+            <label for="priorityLevelHigh">High</label>
+          </div>
+          
+          <div class ="radio-element">
+            <input type="radio" id="priorityLevelHighest" v-model= "priorityLevel" name="priorityLevel" value="Highest">
+            <label for="priorityLevelHighest">Highest</label>
+          </div>
+      </div>
+
+      <input type="submit" value="Save New Task"/>
+    </form>
+  </div>
+</body>
+</html>
